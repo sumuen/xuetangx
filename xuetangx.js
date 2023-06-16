@@ -16,7 +16,7 @@ const urls = [
     'https://www.xuetangx.com/api/v1/lms/exercise/get_exercise_list/2693529/6801790/',
   ];
 // 引用答案库对象
-const answerBank = require('./answerBank.json');  
+const answerBank = require('./jsonlocal/answerBank.json');  
 
 // 创建未回答问题对象
 const unansweredProblems = [];
@@ -59,7 +59,7 @@ rl.question('请输入cookie: ', (cookie) => {
         }
 
         // 将未回答问题信息写入JSON文件
-        fs.writeFileSync('unansweredProblems.json', JSON.stringify(unansweredProblems), 'utf8');
+        fs.writeFileSync('./jsonlocal/unansweredProblems.json', JSON.stringify(unansweredProblems), 'utf8');
       })
       .catch(err => {
         console.error(err);
@@ -77,7 +77,7 @@ rl.question('请输入cookie: ', (cookie) => {
 
 function answerProblems(headers) {
   // 引入未作答问题的数据
-  const unansweredProblems = require('./unansweredProblems.json');
+  const unansweredProblems = require('./jsonlocal/unansweredProblems.json');
 
   // 过滤出在答案库中存在的问题
   const problemsToAnswer = unansweredProblems.filter(problem => {
