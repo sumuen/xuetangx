@@ -28,7 +28,7 @@ const urls = [
      });
   }
   
-  rl.question('请输入cookie: ', async (cookie) => { // 注意这里我们添加了 async 关键字
+  rl.question('请输入cookie: ', async (cookie) => { 
     const _abfpc = cookie.match(/_abfpc=([^;]*);/)[1];
     const csrftoken = cookie.match(/csrftoken=([^;]*);/)[1];
     const sessionid = cookie.match(/sessionid=([^;]*);/)[1];
@@ -44,7 +44,7 @@ const urls = [
       const url = urls[i];
       try {
         console.log(`正在请求第${i+1}章习题...`);
-        const response = await got(url, { headers }); // 这里我们使用 await 来等待 got 请求
+        const response = await got(url, { headers }); // await 
         const data = JSON.parse(response.body).data;
   
         for(const problem of data.problems) {
@@ -60,7 +60,7 @@ const urls = [
         console.error(err);
       }
   
-      await delay(1000); // 这将添加一个1秒的延迟
+      await delay(1000); // 加一个1秒的延迟
     }
     
     // 所有请求完成后，开始答题
