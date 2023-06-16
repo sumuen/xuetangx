@@ -1,3 +1,4 @@
+#速通公共安全危机管理-学堂在线
 1. 构建答案json库，通过已完成习题的cookie进行查询习题答案，（已完成的问题，problem中user中会有answer数据，即正确答案）并提取到“包含每套习题的exercise_id，每个问题的problem_id”的文件中
 2. 通过exercise_list提取每套习题的exercise_id，每个问题的problem_id
 3. 通过1获得的exercise_id和problem_id向答案json文件中寻找对应的answer，并拼装出提交答案的请求体
@@ -15,7 +16,6 @@
 > https://www.xuetangx.com/api/v1/lms/exercise/get_exercise_list/2693522/6801790/
 > https://www.xuetangx.com/api/v1/lms/exercise/get_exercise_list/2693523/6801790/
 > https://www.xuetangx.com/api/v1/lms/exercise/get_exercise_list/2693524/6801790/
->
 > https://www.xuetangx.com/api/v1/lms/exercise/get_exercise_list/2693525/6801790/
 > https://www.xuetangx.com/api/v1/lms/exercise/get_exercise_list/2693526/6801790/
 > https://www.xuetangx.com/api/v1/lms/exercise/get_exercise_list/2693527/6801790/
