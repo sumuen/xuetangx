@@ -15,66 +15,60 @@ const urls = [
     'https://www.xuetangx.com/api/v1/lms/exercise/get_exercise_list/2693528/6801790/',
     'https://www.xuetangx.com/api/v1/lms/exercise/get_exercise_list/2693529/6801790/',
   ];
-// 引用答案库对象
-const answerBank = require('./jsonlocal/answerBank.json');  
-
-// 创建未回答问题对象
-const unansweredProblems = [];
-
-// 从用户输入获取cookie
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
-
-rl.question('请输入cookie: ', (cookie) => {
-  // 提取X-CSRFToken和其他值
-  const _abfpc = cookie.match(/_abfpc=([^;]*);/)[1];
-  const csrftoken = cookie.match(/csrftoken=([^;]*);/)[1];
-  const sessionid = cookie.match(/sessionid=([^;]*);/)[1];
-
-  // 设置请求头
-  const headers = {
-    'Content-Type': 'application/json',
-    'X-CSRFToken': csrftoken, 
-    'Cookie': `_abfpc=${_abfpc}; csrftoken=${csrftoken}; sessionid=${sessionid};`
-  };
-
-  // 处理每个URL
-  urls.forEach((url, index) => {
-    got(url, { headers })
-      .then(response => {
+  const answerBank = require('./jsonlocal/answerBank.json');  
+  const unansweredProblems = [];
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+  
+  function delay(t, v) {
+     return new Promise(function(resolve) { 
+         setTimeout(resolve.bind(null, v), t)
+     });
+  }
+  
+  rl.question('请输入cookie: ', async (cookie) => { // 注意这里我们添加了 async 关键字
+    const _abfpc = cookie.match(/_abfpc=([^;]*);/)[1];
+    const csrftoken = cookie.match(/csrftoken=([^;]*);/)[1];
+    const sessionid = cookie.match(/sessionid=([^;]*);/)[1];
+    const headers = {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': csrftoken, 
+      'Cookie': `_abfpc=${_abfpc}; csrftoken=${csrftoken}; sessionid=${sessionid};`
+    };
+  
+    console.log("开始请求题库...");
+  
+    for (let i = 0; i < urls.length; i++) {
+      const url = urls[i];
+      try {
+        console.log(`正在请求第${i+1}章习题...`);
+        const response = await got(url, { headers }); // 这里我们使用 await 来等待 got 请求
         const data = JSON.parse(response.body).data;
-
-        // 遍历每个问题
+  
         for(const problem of data.problems) {
-          // 如果用户未回答问题，保存问题信息
           if(!problem.user.is_show_answer) {
             const content = problem.content;
             const problemId = content.ProblemID;
             const exerciseId = data.exercise_id;
-
             unansweredProblems.push({ problemId, exerciseId });
           }
         }
-
-        // 将未回答问题信息写入JSON文件
         fs.writeFileSync('./jsonlocal/unansweredProblems.json', JSON.stringify(unansweredProblems), 'utf8');
-      })
-      .catch(err => {
+      } catch(err) {
         console.error(err);
-      });
-      
-      if (index === urls.length - 1) {
-        // 开始回答问题
-        answerProblems(headers);
       }
+  
+      await delay(1000); // 这将添加一个1秒的延迟
+    }
+    
+    // 所有请求完成后，开始答题
+    answerProblems(headers);
+  
+    rl.close();
   });
-
-  // 关闭readline接口
-  rl.close();
-});
-
+  
 function answerProblems(headers) {
   // 引入未作答问题的数据
   const unansweredProblems = require('./jsonlocal/unansweredProblems.json');
