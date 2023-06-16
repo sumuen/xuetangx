@@ -58,7 +58,7 @@
 
 ## 4.提交答案请求
 
-请求头必须：X-CSRFToken（未知，可重复使用），Cookie（用户登录生成）
+请求头必须：X-CSRFToken（这个戳随token生成），Cookie（用户登录生成）
 
 ```
 POST https://www.xuetangx.com/api/v1/lms/exercise/problem_apply/
