@@ -37,18 +37,9 @@
 
 ## 2.通过exercise_list提取每套习题的exercise_id，未作答问题的problem_id
 
-请求下面十个章节的习题链接获取到所有的习题，并通过脚本提取出每章中user数据is_show_answer=False的题目，记录他们的exercise_id，每个问题的problem_id
+请求上面十个章节的习题链接获取到所有的习题，并通过脚本提取出每章中user数据is_show_answer=False的题目，记录他们的exercise_id，每个问题的problem_id
 
-> https://www.xuetangx.com/api/v1/lms/exercise/get_exercise_list/2693520/6801790/
-> https://www.xuetangx.com/api/v1/lms/exercise/get_exercise_list/2693521/6801790/
-> https://www.xuetangx.com/api/v1/lms/exercise/get_exercise_list/2693522/6801790/
-> https://www.xuetangx.com/api/v1/lms/exercise/get_exercise_list/2693523/6801790/
-> https://www.xuetangx.com/api/v1/lms/exercise/get_exercise_list/2693524/6801790/
-> https://www.xuetangx.com/api/v1/lms/exercise/get_exercise_list/2693525/6801790/
-> https://www.xuetangx.com/api/v1/lms/exercise/get_exercise_list/2693526/6801790/
-> https://www.xuetangx.com/api/v1/lms/exercise/get_exercise_list/2693527/6801790/
-> https://www.xuetangx.com/api/v1/lms/exercise/get_exercise_list/2693528/6801790/
-> https://www.xuetangx.com/api/v1/lms/exercise/get_exercise_list/2693529/6801790/
+
 
 ## 3.拼装出提交答案的请求
 

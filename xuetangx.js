@@ -124,13 +124,13 @@ function answerProblems(headers) {
         }
 
         index++;
-        setTimeout(submitAnswer, 3000);  // 延迟3秒后再次调用函数
+        setTimeout(submitAnswer, 1000);  // 延迟3秒后再次调用函数
       })
       .catch(err => {
         console.error(err);
         failureCount++;  // 如果请求失败，也视为作答失败
         index++;
-        setTimeout(submitAnswer, 3000);  // 延迟3秒后再次调用函数
+        setTimeout(submitAnswer, 500);  // 延迟3秒后再次调用函数
       });
   }
 
