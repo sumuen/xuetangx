@@ -124,7 +124,7 @@ function answerProblems(headers) {
         }
 
         index++;
-        setTimeout(submitAnswer, 1000);  // 延迟3秒后再次调用函数
+        setTimeout(submitAnswer, 3000);  // 延迟3秒后再次调用函数
       })
       .catch(err => {
         console.error(err);
