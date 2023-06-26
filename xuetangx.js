@@ -3,7 +3,7 @@ const fs = require('fs');
 const readline = require('readline');
 
 // 请求的URL列表
-const urls = [1
+const urls = [
     'https://www.xuetangx.com/api/v1/lms/exercise/get_exercise_list/2693520/6801790/',
     'https://www.xuetangx.com/api/v1/lms/exercise/get_exercise_list/2693521/6801790/',
     'https://www.xuetangx.com/api/v1/lms/exercise/get_exercise_list/2693522/6801790/',
